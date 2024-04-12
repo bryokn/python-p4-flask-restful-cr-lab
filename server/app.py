@@ -17,10 +17,18 @@ db.init_app(app)
 api = Api(app)
 
 class Plants(Resource):
-    pass
+    def get(self):
+        return Plant.get_all()
+    
+    def post(self):
+        return Plant.create()
 
 class PlantByID(Resource):
-    pass
+    def get(self, plant_id):
+        return Plant.get_by_id(plant_id)
+
+api.add_resource(Plants, '/plants')
+api.add_resource(PlantByID, '/plants/<int:plant_id>')
         
 
 if __name__ == '__main__':
